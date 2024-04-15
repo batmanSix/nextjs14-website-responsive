@@ -5,6 +5,7 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import { Link } from "@nextui-org/link";
+import { Suspense } from "react"
 import clsx from "clsx";
 
 export const metadata: Metadata = {
@@ -41,9 +42,11 @@ export default function RootLayout({
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<Navbar></Navbar>
 					<div className="relative flex flex-col h-screen">
-						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-							{children}
-						</main>
+						<Suspense fallback={<div>loading</div>}>
+							<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+								{children}
+							</main>
+						</Suspense>
 						<footer className="w-full flex items-center justify-center py-3">
 							<Link
 								isExternal
